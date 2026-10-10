@@ -128,7 +128,7 @@ version_submitted, approval_suspended, version_approved, approval_restored
 
 - **Pagamento.** O enunciado fala em liberar pagamento; aqui existe só o status. Quem paga precisa reagir a `approval_suspended`, e um pagamento já feito não é desfeito por este serviço.
 - **Papéis.** Não há autenticação nem separação entre marca e criador; qualquer chamada aprova.
-- **Reaprovar sozinho é uma escolha.** Li "deixa de estar aprovada até a nova versão ser aprovada" ao pé da letra. Se a marca precisar confirmar a entrega inteira de novo, a mudança é em `deliveryStatus`.
+- **Novo aceite da entrega depois de versão nova.** O enunciado diz que a entrega "deixa de estar aprovada até a nova versão ser aprovada", então aprovar a versão nova devolve a aprovação. Se a marca precisar confirmar a entrega inteira de novo, a mudança é limpar `signed_off_at` quando a aprovação é suspensa.
 - **Mudar as peças exigidas de uma campanha** com entregas em andamento. Hoje a lista é fixada na criação.
 - **Comentário em roteiro, capa e legenda**, resposta a comentário e marcar comentário como resolvido.
 - **Upload real** e conferência de que a URL existe ou de que a duração informada é a do arquivo.
@@ -136,6 +136,8 @@ version_submitted, approval_suspended, version_approved, approval_restored
 
 ## Uso de IA
 
-O código, os testes e este README foram escritos com Claude Code (Claude Opus), a partir do enunciado. O modelo de status calculado e a decisão de reaprovar sozinho foram propostos pela IA.
+O código, os testes e este README foram escritos com Claude Code (Claude Opus), a partir do enunciado. O modelo de status calculado foi proposto pela IA.
+
+Verificação automática, rodada pela IA e não por mim: `npm test` passa com 17 testes em 1 arquivo e `npx tsc --noEmit` não acusa erro. Entre os testes estão "falha com erro claro quando há peça exigida pendente, dizendo qual e em que estado", "deixa de estar aprovada até a versão nova ser aprovada" e "fica visível na versão em que foi feito e não migra para a versão nova".
 
 O que eu revisei: os padrões de backend, as tipagens, os early returns, as constantes e se os testes realmente testam os cenários de falha.
